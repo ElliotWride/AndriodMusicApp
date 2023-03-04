@@ -3,6 +3,7 @@ package com.example.recview;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.media.MediaPlayer;
 import android.view.View;
@@ -14,16 +15,17 @@ public class PlayerActivity extends AppCompatActivity {
     MediaPlayer music;
 
     @Override
-    protected void onCreate(
-            Bundle savedInstanceState)
+    protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
-
+        Bundle bundle = getIntent().getExtras();
+        //String song =  "res/raw/";
+        //song += bundle.getString("name")+ ".mp3";
+        //Toast.makeText(this, song, Toast.LENGTH_SHORT).show();
         // Adding the music file to our
         // newly created object music
-        music = MediaPlayer.create(
-                this, R.raw.igors_theme);
+        music = MediaPlayer.create(this, R.raw.igors_theme);
     }
 
     // Playing the music

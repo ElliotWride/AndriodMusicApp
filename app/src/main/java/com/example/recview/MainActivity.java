@@ -21,17 +21,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         setContentView(R.layout.activity_main);
 
         // data to populate the RecyclerView with
-        ArrayList<String> animalNames = new ArrayList<>();
-        animalNames.add("Horse");
-        animalNames.add("Cow");
-        animalNames.add("Camel");
-        animalNames.add("Sheep");
-        animalNames.add("Goat");
+        ArrayList<String> songs = new ArrayList<>();
+        songs.add("igors_theme");
+
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvAnimals);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RecyclerViewAdapter(this, animalNames);
+        adapter = new RecyclerViewAdapter(this, songs);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
     }
@@ -40,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, PlayerActivity.class);
+        intent.putExtra("name",adapter.getItem(position));
         startActivity(intent);
     }
 }
