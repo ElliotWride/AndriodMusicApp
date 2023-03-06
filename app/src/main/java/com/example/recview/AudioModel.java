@@ -6,6 +6,13 @@ public class AudioModel {
     String album;
     String artist;
 
+    public AudioModel(String p, String n, String al, String ar){
+        this.path=p;
+        this.name=n;
+        this.album = al;
+        this.artist = ar;
+    }
+
     public String getPath(){
         return path;
     }

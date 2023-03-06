@@ -13,6 +13,7 @@ public class PlayerActivity extends AppCompatActivity {
 
     // Instantiating the MediaPlayer class
     MediaPlayer music;
+    String currentSong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,7 +26,9 @@ public class PlayerActivity extends AppCompatActivity {
         //Toast.makeText(this, song, Toast.LENGTH_SHORT).show();
         // Adding the music file to our
         // newly created object music
-        music = MediaPlayer.create(this, R.raw.igors_theme);
+        currentSong = bundle.getString("path");
+        music = MediaPlayer.create(this, Uri.parse(bundle.getString("path")));
+
     }
 
     // Playing the music
@@ -46,6 +49,6 @@ public class PlayerActivity extends AppCompatActivity {
     public void musicstop(View v)
     {
         music.stop();
-        music= MediaPlayer.create(this, R.raw.igors_theme);
+        music= MediaPlayer.create(this, Uri.parse(currentSong));
     }
 }

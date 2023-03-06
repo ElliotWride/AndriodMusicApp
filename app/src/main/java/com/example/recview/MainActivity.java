@@ -1,16 +1,11 @@
 package com.example.recview;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +21,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        final Button button1 = (Button) findViewById(R.id.button3);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ChooseSongActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }
