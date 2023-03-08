@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 public class AudioManager implements Serializable {
     private MediaPlayer currentSong = null;
+    private String currentSongPath;
     private Context context;
     private String test = "";
 
@@ -30,6 +31,7 @@ public class AudioManager implements Serializable {
 
     public void playSong(String newSong){
         MediaPlayer music = MediaPlayer.create(context, Uri.parse(newSong));
+        currentSongPath = newSong;
         try {
             currentSong.pause();
         }catch (Exception e){
@@ -58,5 +60,13 @@ public class AudioManager implements Serializable {
 
     public Context getContext() {
         return context;
+    }
+
+    public MediaPlayer getCurrentSong() {
+        return currentSong;
+    }
+
+    public String getCurrentSongPath() {
+        return currentSongPath;
     }
 }

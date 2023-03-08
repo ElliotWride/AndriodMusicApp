@@ -18,63 +18,38 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ChooseSongActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener, Serializable {
-private List<AudioModel> audio = new ArrayList<>();
+
 private AudioModel song;
+private List<AudioModel> audio;
     RecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_song);
-
+        Bundle bundle = getIntent().getExtras();
         // data to populate the RecyclerView with
         ArrayList<String> songs = new ArrayList<>();
         Toast.makeText(this, "b4 import", Toast.LENGTH_SHORT).show();
-        getAllAudioFromDevice();
-
+        audio = MainActivity.audioFetcher.getAudio();
         for (AudioModel audioModel: audio){
             songs.add(audioModel.name);
         }
 
         // set up the RecyclerView
+
         RecyclerView recyclerView = findViewById(R.id.rvSongs);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new RecyclerViewAdapter(this, songs);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
-
     }
 
-    private void getAllAudioFromDevice() {
-        ContentResolver contentResolver = getContentResolver();
-        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        String selection = MediaStore.Audio.Media.IS_MUSIC + "!= 0";
-        String sortOrder = MediaStore.Audio.Media.TITLE + " ASC";
-        Cursor cursor = contentResolver.query(uri, null,selection, null, sortOrder);
-        ArrayList<AudioModel> audioList = new ArrayList<>();
-        if (cursor != null && cursor.getCount() > 0) {
 
-            while (cursor.moveToNext()) {
-                String data = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
-                String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
-                String album = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM));
-                String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
-
-                // Save to audioList
-                try {
-                    this.audio.add(new AudioModel(data, title, album, artist));
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-
-            }
-        }
-        cursor.close();
-
-    }
 
 
     @Override

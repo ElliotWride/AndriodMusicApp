@@ -35,8 +35,8 @@ public class PlayerActivity extends AppCompatActivity implements Serializable {
         currentSong = bundle.getString("path");
         //Toast.makeText(this, currentSong, Toast.LENGTH_SHORT).show();
         MainActivity.audioManager.setContext(this);
-        Toast.makeText(this,MainActivity.audioManager.getTest(), Toast.LENGTH_SHORT).show();
-        MainActivity.audioManager.setTest(bundle.getString("name"));
+
+
 
     }
 
