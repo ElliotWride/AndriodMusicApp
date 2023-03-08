@@ -34,10 +34,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,PlayerActivity.class);
                 if(MainActivity.audioManager.getCurrentSong() == null){
-                    intent.putExtra("path",audioFetcher.getAudio().get(ThreadLocalRandom.current().nextInt(0, audioFetcher.getAudio().size() + 1)).path);
+                    AudioModel temp = audioFetcher.getAudio().get(ThreadLocalRandom.current().nextInt(0, audioFetcher.getAudio().size() + 1));
+                    intent.putExtra("path",temp.path);
                 }else{
                     intent.putExtra("path",audioManager.getCurrentSongPath());
                 }
+
                 startActivity(intent);
             }
         });
