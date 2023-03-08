@@ -1,6 +1,8 @@
 package com.example.recview;
 
-public class AudioModel {
+import java.io.Serializable;
+
+public class AudioModel implements Serializable {
     String path;
     String name;
     String album;

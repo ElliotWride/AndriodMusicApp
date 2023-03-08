@@ -2,18 +2,24 @@ package com.example.recview;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.Toast;
 
-public class PlayerActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+public class PlayerActivity extends AppCompatActivity implements Serializable {
 
     // Instantiating the MediaPlayer class
     MediaPlayer music;
     String currentSong;
+    String oldSong;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,28 +33,31 @@ public class PlayerActivity extends AppCompatActivity {
         // Adding the music file to our
         // newly created object music
         currentSong = bundle.getString("path");
-        music = MediaPlayer.create(this, Uri.parse(bundle.getString("path")));
+        //Toast.makeText(this, currentSong, Toast.LENGTH_SHORT).show();
+        MainActivity.audioManager.setContext(this);
+        Toast.makeText(this,MainActivity.audioManager.getTest(), Toast.LENGTH_SHORT).show();
+        MainActivity.audioManager.setTest(bundle.getString("name"));
 
     }
 
     // Playing the music
     public void musicplay(View v)
     {
-        music.start();
-        Toast.makeText(this, "play", Toast.LENGTH_SHORT).show();
+        MainActivity.audioManager.playSong(currentSong);
     }
 
     // Pausing the music
     public void musicpause(View v)
     {
-        music.pause();
+        MainActivity.audioManager.pauseSong();
 
     }
 
     // Stopping the music
     public void musicstop(View v)
     {
-        music.stop();
-        music= MediaPlayer.create(this, Uri.parse(currentSong));
+        MainActivity.audioManager.stopSong();
     }
+
+
 }

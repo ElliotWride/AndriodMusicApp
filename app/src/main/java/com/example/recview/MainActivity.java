@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+public class MainActivity extends AppCompatActivity implements Serializable {
+    public static AudioManager audioManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        audioManager = new AudioManager();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final Button button = (Button) findViewById(R.id.button2);
@@ -18,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ChooseSongActivity.class);
+                intent.putExtra("audioManager",audioManager);
                 startActivity(intent);
             }
         });
@@ -29,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
     }
 }

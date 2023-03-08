@@ -15,11 +15,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChooseSongActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener {
+public class ChooseSongActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener, Serializable {
 private List<AudioModel> audio = new ArrayList<>();
+private AudioModel song;
     RecyclerViewAdapter adapter;
 
     @Override
@@ -75,15 +77,15 @@ private List<AudioModel> audio = new ArrayList<>();
     }
 
 
-
-
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ChooseSongActivity.this, PlayerActivity.class);
+        intent.putExtra("currentSong", (Serializable) song);
         for(AudioModel audioModel: audio) {
             if (audioModel.name == adapter.getItem(position)) {
                 intent.putExtra("path", audioModel.path);
+                song = audioModel;
             }
         }
         intent.putExtra("name", adapter.getItem(position));
