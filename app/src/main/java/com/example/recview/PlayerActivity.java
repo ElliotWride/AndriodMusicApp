@@ -5,10 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.media.MediaPlayer;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -33,8 +37,15 @@ public class PlayerActivity extends AppCompatActivity implements Serializable {
         // Adding the music file to our
         // newly created object music
         currentSong = bundle.getString("path");
+        MainActivity.audioManager.setCurrentSongPath(currentSong);
         //Toast.makeText(this, currentSong, Toast.LENGTH_SHORT).show();
         MainActivity.audioManager.setContext(this);
+        Bitmap pic = MainActivity.audioManager.getEmbeddedPicture();
+        if (pic!=null){
+            ImageView iv = (ImageView)findViewById(R.id.imageView);
+            iv.setImageBitmap(pic);
+        }
+
 
 
 
@@ -58,6 +69,8 @@ public class PlayerActivity extends AppCompatActivity implements Serializable {
     {
         MainActivity.audioManager.stopSong();
     }
+
+
 
 
 }

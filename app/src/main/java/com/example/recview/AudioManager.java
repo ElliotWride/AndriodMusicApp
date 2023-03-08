@@ -1,6 +1,9 @@
 package com.example.recview;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.widget.Toast;
@@ -19,6 +22,10 @@ public class AudioManager implements Serializable {
 
     public void setCurrentSong(MediaPlayer currentSong) {
         this.currentSong = currentSong;
+    }
+
+    public void setCurrentSongPath(String currentSongPath) {
+        this.currentSongPath = currentSongPath;
     }
 
     public void setTest(String testStr){
@@ -68,5 +75,22 @@ public class AudioManager implements Serializable {
 
     public String getCurrentSongPath() {
         return currentSongPath;
+    }
+
+    public Bitmap getEmbeddedPicture(){
+        android.media.MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+        mmr.setDataSource(currentSongPath);
+
+        byte [] data = mmr.getEmbeddedPicture();
+        //coverart is an Imageview object
+
+        // convert the byte array to a bitmap
+        if(data != null)
+        {
+            return BitmapFactory.decodeByteArray(data, 0, data.length);
+
+        }
+        else
+            return null;
     }
 }
