@@ -36,8 +36,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 if(MainActivity.audioManager.getCurrentSong() == null){
                     AudioModel temp = audioFetcher.getAudio().get(ThreadLocalRandom.current().nextInt(0, audioFetcher.getAudio().size() + 1));
                     intent.putExtra("path",temp.path);
+                    intent.putExtra("album",temp.album);
+                    intent.putExtra("name",temp.name);
                 }else{
                     intent.putExtra("path",audioManager.getCurrentSongPath());
+                    intent.putExtra("album",audioManager.getAlbum());
+                    intent.putExtra("name",audioManager.getName());
                 }
 
                 startActivity(intent);

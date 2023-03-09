@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="430dp"
+        android:layout_width="312dp"
+        android:layout_height="209dp"
         android:contentDescription="todo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -21,57 +21,57 @@
         android:id="@+id/start"
         android:layout_width="122dp"
         android:layout_height="93dp"
-        android:layout_marginTop="564dp"
+        android:layout_marginTop="272dp"
         android:backgroundTint="@color/white"
         android:contentDescription="todo"
         android:onClick="musicplay"
         android:text="play"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/pause"
+        app:layout_constraintEnd_toStartOf="@+id/stop"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/stop"
+        app:layout_constraintStart_toEndOf="@+id/pause"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/stop"
         android:layout_width="122dp"
         android:layout_height="93dp"
-        android:layout_marginTop="564dp"
+        android:layout_marginTop="272dp"
         android:backgroundTint="@color/white"
         android:contentDescription="todo"
         android:onClick="musicstop"
         android:text="stop"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/start"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/pause"
-        android:layout_width="122dp"
-        android:layout_height="93dp"
-        android:layout_marginTop="564dp"
-        android:backgroundTint="@color/white"
-        android:contentDescription="todo"
-        android:onClick="musicpause"
-        android:text="pause"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/start"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/pause"
+        android:layout_width="122dp"
+        android:layout_height="93dp"
+        android:layout_marginTop="272dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="todo"
+        android:onClick="musicpause"
+        android:text="pause"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/start"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="393dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="728dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        android:textColor="@color/white"
         android:textAlignment="center"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 

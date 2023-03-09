@@ -60,6 +60,8 @@ private List<AudioModel> audio;
         for(AudioModel audioModel: audio) {
             if (audioModel.name == adapter.getItem(position)) {
                 intent.putExtra("path", audioModel.path);
+                intent.putExtra("album", audioModel.album);
+                intent.putExtra("name", audioModel.name);
                 song = audioModel;
             }
         }

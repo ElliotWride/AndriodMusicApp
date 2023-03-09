@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
@@ -44,9 +45,10 @@ public class PlayerActivity extends AppCompatActivity implements Serializable {
 
     class AlbumCoverFetcher extends AsyncTask<String, Void, String> {
         private Context parent;
-
-        public AlbumCoverFetcher(Context context){
-            parent = context;
+        private Drawable drawable = null;
+        private String query;
+        public AlbumCoverFetcher(String q){
+            query = q;
         }
 
         protected String doInBackground(String... strings) {
@@ -56,24 +58,21 @@ public class PlayerActivity extends AppCompatActivity implements Serializable {
                 CustomSearchAPI cs = new CustomSearchAPI.Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), null).setApplicationName("recview")
                         .setGoogleClientRequestInitializer(new CustomSearchAPIRequestInitializer("AIzaSyBp6YlE_Z7O95oy20cL65VPFjOB-6zPmdk"))
                         .build();
-                CustomSearchAPI.Cse.List list = cs.cse().list().setQ("orange").setCx("f6276d7a5ac5c43c5");
+                CustomSearchAPI.Cse.List list = cs.cse().list().setQ(query).setCx("f6276d7a5ac5c43c5");
+                list.setSearchType("image");
                 System.out.println(list);
                 //Toast.makeText(this, list.toString(), Toast.LENGTH_SHORT).show();
                 results = list.execute();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println(results.size());
-            //SharedPreferences prefs = parent.getSharedPreferences("com.example.recview", Context.MODE_PRIVATE);
-            String urlString = results.getItems().get(0).getImage().getThumbnailLink();
             try {
-                ImageView iv = (ImageView) findViewById(R.id.imageView);
+                String urlString = results.getItems().get(0).getImage().getThumbnailLink();
                 InputStream is = (InputStream) new URL(urlString).getContent();
-                Drawable d = Drawable.createFromStream(is, "src name");
-                iv.setImageDrawable(d);
-            } catch (Exception e) {
+                this.drawable = Drawable.createFromStream(is, "src name");
 
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return "test";
         }
@@ -81,7 +80,10 @@ public class PlayerActivity extends AppCompatActivity implements Serializable {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            if (drawable != null){
+                ImageView iv = (ImageView) findViewById(R.id.imageView);
+                iv.setImageDrawable(drawable);
+            }
         }
     }
 
@@ -96,18 +98,22 @@ public class PlayerActivity extends AppCompatActivity implements Serializable {
         // Adding the music file to our
         // newly created object music
         currentSong = bundle.getString("path");
+        MainActivity.audioManager.setAlbum(bundle.getString("album"));
+        MainActivity.audioManager.setName(bundle.getString("name"));
         MainActivity.audioManager.setCurrentSongPath(currentSong);
         //Toast.makeText(this, currentSong, Toast.LENGTH_SHORT).show();
         MainActivity.audioManager.setContext(this);
         Bitmap pic = MainActivity.audioManager.getEmbeddedPicture();
         ImageView iv = (ImageView) findViewById(R.id.imageView);
-        //if (pic!=null){
-        if (false) {
+        if (pic!=null){
             iv.setImageBitmap(pic);
         } else {
-            AlbumCoverFetcher albumCoverFetcher = new AlbumCoverFetcher(this);
+            AlbumCoverFetcher albumCoverFetcher = new AlbumCoverFetcher(bundle.getString("album"));
             albumCoverFetcher.execute();
         }
+        TextView textView = (TextView) findViewById(R.id.textView2);
+        textView.setText(MainActivity.audioManager.getName());
+
     }
 
 

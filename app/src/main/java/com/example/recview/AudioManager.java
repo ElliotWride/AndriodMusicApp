@@ -14,7 +14,9 @@ public class AudioManager implements Serializable {
     private MediaPlayer currentSong = null;
     private String currentSongPath;
     private Context context;
-    private String test = "";
+    private String name = "";
+
+    private String album = "";
 
     public void setContext(Context context) {
         this.context = context;
@@ -28,13 +30,7 @@ public class AudioManager implements Serializable {
         this.currentSongPath = currentSongPath;
     }
 
-    public void setTest(String testStr){
-        test = testStr;
-    }
 
-    public String getTest() {
-        return test;
-    }
 
     public void playSong(String newSong){
         MediaPlayer music = MediaPlayer.create(context, Uri.parse(newSong));
@@ -92,5 +88,21 @@ public class AudioManager implements Serializable {
         }
         else
             return null;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }
