@@ -3,6 +3,7 @@ package com.example.recview;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +46,14 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 }
 
                 startActivity(intent);
+            }
+        });
+        Button button2 = findViewById(R.id.buttonGit);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://github.com/ElliotWride/AndriodMusicApp";
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
             }
         });
 
