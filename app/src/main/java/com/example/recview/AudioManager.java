@@ -6,18 +6,62 @@ import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.widget.Toast;
 
 import java.io.Serializable;
 
-public class AudioManager implements Serializable {
+public class AudioManager implements Serializable { //class to handle actions on playing songs, implemented statically.
     private MediaPlayer currentSong = null;
     private String currentSongPath;
     private Context context;
     private String name = "";
-
     private String album = "";
 
+    public void playSong(String newSong){//plays audio
+        MediaPlayer music = MediaPlayer.create(context, Uri.parse(newSong));
+        currentSongPath = newSong;
+        try {
+            currentSong.pause(); //pauses currently playing song so audio doesn't overlap
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        setCurrentSong(music);
+        currentSong.start(); //starts song
+    }
+
+    public void pauseSong(){//pauses audio
+        try {
+            currentSong.pause();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void stopSong(){//stops audio
+        try{
+
+        currentSong.stop();}
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public Bitmap getEmbeddedPicture(){ //returns bitmap of the album cover art of current song
+        android.media.MediaMetadataRetriever mmr = new MediaMetadataRetriever();//used to read song metadata
+        mmr.setDataSource(currentSongPath);
+
+        byte[] data = mmr.getEmbeddedPicture();
+        //coverart is an Imageview object
+
+        //convert the byte array to a bitmap
+        if (data != null) {
+            return BitmapFactory.decodeByteArray(data, 0, data.length);
+        } else{
+            return null;
+        }
+    }
+
+
+    //getters and setters
     public void setContext(Context context) {
         this.context = context;
     }
@@ -30,64 +74,12 @@ public class AudioManager implements Serializable {
         this.currentSongPath = currentSongPath;
     }
 
-
-
-    public void playSong(String newSong){
-        MediaPlayer music = MediaPlayer.create(context, Uri.parse(newSong));
-        currentSongPath = newSong;
-        try {
-            currentSong.pause();
-        }catch (Exception e){
-            Toast.makeText(context, "caught", Toast.LENGTH_SHORT).show();
-        }
-        setCurrentSong(music);
-        currentSong.start();
-    }
-
-    public void pauseSong(){
-        try {
-            currentSong.pause();
-        }catch (Exception e){
-
-        }
-    }
-
-    public void stopSong(){
-        try{
-
-        currentSong.stop();}
-        catch (Exception e){
-
-        }
-    }
-
-    public Context getContext() {
-        return context;
-    }
-
     public MediaPlayer getCurrentSong() {
         return currentSong;
     }
 
     public String getCurrentSongPath() {
         return currentSongPath;
-    }
-
-    public Bitmap getEmbeddedPicture(){
-        android.media.MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-        mmr.setDataSource(currentSongPath);
-
-        byte [] data = mmr.getEmbeddedPicture();
-        //coverart is an Imageview object
-
-        // convert the byte array to a bitmap
-        if(data != null)
-        {
-            return BitmapFactory.decodeByteArray(data, 0, data.length);
-
-        }
-        else
-            return null;
     }
 
     public String getAlbum() {
