@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -102,19 +103,19 @@ public class PlayerActivity extends AppCompatActivity implements Serializable { 
 
 
     // Playing the music
-    public void musicplay()
+    public void musicplay(View v)
     {
         MainActivity.audioManager.playSong(currentSong);
     }
 
     // Pausing the music
-    public void musicpause()
+    public void musicpause(View v)
     {
         MainActivity.audioManager.pauseSong();
     }
 
     // Stopping the music
-    public void musicstop()
+    public void musicstop(View v)
     {
         MainActivity.audioManager.stopSong();
     }
