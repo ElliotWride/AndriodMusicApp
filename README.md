@@ -76,7 +76,7 @@ and as there was very little documentation of alternatives so this slowed down d
 Also i found that android studio would sometime not recognise XML files or the Gradle would break somehow
 which often was solved by fiddling with rebuilding, restarting the ide ect.
 
-##Future Improvements
+## Future Improvements
 I would like to implement a bunch of quality of life features like being able to control music
 in the notification bar or on the lockscreen. Or being able to view and seek how far you are
 in a song. I would also like to implement playlists and the ability to view by artist or album.
