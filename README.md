@@ -1,5 +1,5 @@
-#Minimalist Music
-##Introduction
+#M inimalist Music
+## Introduction
 Welcome to Minimalist Music, a bloat free and sleek music player app.
 With this app you can
 1. Import, view and play all songs that you have downloaded
@@ -60,12 +60,12 @@ Android has a really good native way of doing media playback using the Media Pla
 This is lightweight and works really well while also having all the features I needed.
 I used custom made classes to keep track of songs and playback as this keeps things nice and neat in the code.
 
-##Novel Features
+## Novel Features
 There is an image fetcher that gets images from the internet to display album art
 when the user doesn't have it downloaded.
 When no song is loaded going to the player will choose a song randomly
 
-##Challenges
+## Challenges
 I found Android studio hard to use at first as the UI is quite overwhelming and buttons 
 don't seem to be where they should be. Also most of the tutorials and examples I found online
 were written for old and often deprecated. This was a problem as lots of stuff just outright didn't work 
