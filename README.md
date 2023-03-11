@@ -1,4 +1,4 @@
-#M inimalist Music
+# Minimalist Music
 ## Introduction
 Welcome to Minimalist Music, a bloat free and sleek music player app.
 With this app you can
