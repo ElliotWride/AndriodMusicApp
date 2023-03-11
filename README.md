@@ -23,7 +23,7 @@ Background features:
 2. When a song finishes a new one is then played for you (randomly or in order depending on
 the choice set on the home screen).
 
-#Design rationale
+# Design rationale
 I have designed the app to look very clean so have made very simple UIs.
 One of which is the song list screen which uses a recycler view to display the songs. I chose
 to use this over list view as it performs better and would use less computational power to
