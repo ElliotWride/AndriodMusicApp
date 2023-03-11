@@ -6,6 +6,8 @@ With this app you can
 2. Songs can be played shuffle or in order
 3. View album art even if you don't have it downloaded
 
+-- NOTE: YOU MUST ALLOW APP PERMISSIONS TO READ STORAGE DATA --
+
 On the home screen you can play a random song by clicking player when no song is loaded,
 go to the song selection screen or go to the player. You can also choose wether to have the
 app on shuffle mode or not using the toolbar menu. There is also a link to the github so you can
